@@ -1,7 +1,6 @@
-const USER_BASE =
-  "https://peterrambeckandersen.com/tomcat/insession-starter/api"
+const USER_BASE = "https://ditlevsoftware.com/tomcat/insession-sem-project/api"
 const INFO_BASE =
-  "https://peterrambeckandersen.com/tomcat/insession-starter/api/info"
+  "https://ditlevsoftware.com/tomcat/insession-sem-project/api/info"
 
 const USER = {
   LOGIN: `${USER_BASE}/login`,
