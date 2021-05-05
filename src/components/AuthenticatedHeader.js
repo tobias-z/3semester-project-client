@@ -29,6 +29,9 @@ function AuthenticatedHeader(props) {
           <LinkContainer to="/admin">
             <Nav.Link>Admin data</Nav.Link>
           </LinkContainer>
+          <LinkContainer to="/restaurants">
+            <Nav.Link>Restaurants</Nav.Link>
+          </LinkContainer>
         </Nav>
         <Nav>
           <Navbar.Text>Signed in as: {props.user.username}</Navbar.Text>

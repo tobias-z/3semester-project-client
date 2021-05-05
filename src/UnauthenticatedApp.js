@@ -21,7 +21,7 @@ function UnauthenticatedApp(props) {
           <MuchDataPage />
         </Route>
         <Route path="/restaurants">
-          <RestaurantsPage />
+          <RestaurantsPage restaurants={props.restaurants} />
         </Route>
         <Route path="/">
           <h1>404</h1>

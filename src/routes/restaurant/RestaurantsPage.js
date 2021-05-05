@@ -2,19 +2,11 @@ import * as React from "react";
 import { Col, Container, Nav, Row } from "react-bootstrap";
 import { Route, Switch, useRouteMatch } from "react-router-dom";
 import { LinkContainer } from "react-router-bootstrap";
-import { fetchData } from "../../apiUtils";
-import { RESTAURANT } from "../../settings";
 import Restaurant from "./Restaurant";
 
-function RestaurantsPage() {
-  const [restaurantDATA, setRestaurantDATA] = React.useState();
+function RestaurantsPage(props) {
+  const { restaurants: restaurantDATA } = props;
   let { path } = useRouteMatch();
-
-  React.useEffect(() => {
-    fetchData(RESTAURANT.ALL)
-      .then((data) => setRestaurantDATA(data))
-      .catch((err) => console.log(err));
-  }, []);
 
   return (
     <Container>
