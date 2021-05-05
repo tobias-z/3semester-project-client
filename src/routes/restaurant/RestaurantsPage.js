@@ -31,7 +31,6 @@ function RestaurantsPage() {
               </Nav>
             </Col>
             <Col md={10}>
-              <pre>Hello</pre>
               <Switch>
                 <Route exact path={path}>
                   <h3>Please select a restaurant.</h3>

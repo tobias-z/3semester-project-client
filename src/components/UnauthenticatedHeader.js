@@ -4,7 +4,13 @@ import { LinkContainer } from "react-router-bootstrap";
 
 function UnauthenticatedHeader() {
   return (
-    <Navbar collapseOnSelect expand="lg" bg="dark" variant="dark">
+    <Navbar
+      className="mb-4"
+      collapseOnSelect
+      expand="lg"
+      bg="dark"
+      variant="dark"
+    >
       <LinkContainer to="/">
         <Navbar.Brand>inSession Startcode</Navbar.Brand>
       </LinkContainer>

@@ -1,10 +1,16 @@
-import * as React from "react"
-import {Nav, Navbar} from "react-bootstrap"
-import {LinkContainer} from "react-router-bootstrap"
+import * as React from "react";
+import { Nav, Navbar } from "react-bootstrap";
+import { LinkContainer } from "react-router-bootstrap";
 
 function AuthenticatedHeader(props) {
   return (
-    <Navbar collapseOnSelect expand="lg" bg="dark" variant="dark">
+    <Navbar
+      className="mb-4"
+      collapseOnSelect
+      expand="lg"
+      bg="dark"
+      variant="dark"
+    >
       <LinkContainer to="/">
         <Navbar.Brand>inSession Startcode</Navbar.Brand>
       </LinkContainer>
@@ -32,7 +38,7 @@ function AuthenticatedHeader(props) {
         </Nav>
       </Navbar.Collapse>
     </Navbar>
-  )
+  );
 }
 
-export default AuthenticatedHeader
+export default AuthenticatedHeader;
