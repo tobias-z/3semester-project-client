@@ -1,6 +1,6 @@
-import * as React from "react"
-import {Nav, Navbar} from "react-bootstrap"
-import {LinkContainer} from "react-router-bootstrap"
+import * as React from "react";
+import { Nav, Navbar } from "react-bootstrap";
+import { LinkContainer } from "react-router-bootstrap";
 
 function UnauthenticatedHeader() {
   return (
@@ -17,6 +17,9 @@ function UnauthenticatedHeader() {
           <LinkContainer to="/muchdata">
             <Nav.Link>Much data</Nav.Link>
           </LinkContainer>
+          <LinkContainer to="/restaurants">
+            <Nav.Link>Restaurants</Nav.Link>
+          </LinkContainer>
         </Nav>
         <Nav>
           <LinkContainer to="/login">
@@ -25,7 +28,7 @@ function UnauthenticatedHeader() {
         </Nav>
       </Navbar.Collapse>
     </Navbar>
-  )
+  );
 }
 
-export default UnauthenticatedHeader
+export default UnauthenticatedHeader;
