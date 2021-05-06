@@ -1,10 +1,16 @@
-import * as React from "react"
-import {Nav, Navbar} from "react-bootstrap"
-import {LinkContainer} from "react-router-bootstrap"
+import * as React from "react";
+import { Nav, Navbar } from "react-bootstrap";
+import { LinkContainer } from "react-router-bootstrap";
 
 function UnauthenticatedHeader() {
   return (
-    <Navbar collapseOnSelect expand="lg" bg="dark" variant="dark">
+    <Navbar
+      className="mb-4"
+      collapseOnSelect
+      expand="lg"
+      bg="dark"
+      variant="dark"
+    >
       <LinkContainer to="/">
         <Navbar.Brand>inSession Startcode</Navbar.Brand>
       </LinkContainer>
@@ -17,6 +23,9 @@ function UnauthenticatedHeader() {
           <LinkContainer to="/muchdata">
             <Nav.Link>Much data</Nav.Link>
           </LinkContainer>
+          <LinkContainer to="/restaurants">
+            <Nav.Link>Restaurants</Nav.Link>
+          </LinkContainer>
         </Nav>
         <Nav>
           <LinkContainer to="/login">
@@ -25,7 +34,7 @@ function UnauthenticatedHeader() {
         </Nav>
       </Navbar.Collapse>
     </Navbar>
-  )
+  );
 }
 
-export default UnauthenticatedHeader
+export default UnauthenticatedHeader;

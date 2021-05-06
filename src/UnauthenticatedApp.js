@@ -1,9 +1,10 @@
-import * as React from "react"
-import {BrowserRouter as Router, Switch, Route} from "react-router-dom"
-import UnauthenticatedHeader from "./components/UnauthenticatedHeader"
-import HomePage from "./routes/HomePage"
-import LoginPage from "./routes/LoginPage"
-import MuchDataPage from "./routes/MuchDataPage"
+import * as React from "react";
+import { BrowserRouter as Router, Switch, Route } from "react-router-dom";
+import UnauthenticatedHeader from "./components/UnauthenticatedHeader";
+import HomePage from "./routes/HomePage";
+import LoginPage from "./routes/LoginPage";
+import MuchDataPage from "./routes/MuchDataPage";
+import RestaurantsPage from "./routes/restaurant/RestaurantsPage";
 
 function UnauthenticatedApp(props) {
   return (
@@ -19,12 +20,15 @@ function UnauthenticatedApp(props) {
         <Route path="/muchdata">
           <MuchDataPage />
         </Route>
+        <Route path="/restaurants">
+          <RestaurantsPage restaurants={props.restaurants} />
+        </Route>
         <Route path="/">
           <h1>404</h1>
         </Route>
       </Switch>
     </Router>
-  )
+  );
 }
 
-export default UnauthenticatedApp
+export default UnauthenticatedApp;
