@@ -34,6 +34,11 @@ function AuthenticatedHeader(props) {
           </LinkContainer>
         </Nav>
         <Nav>
+          <LinkContainer to="/basket">
+            <Nav.Link>
+              <i class="fas fa-shopping-basket"></i>
+            </Nav.Link>
+          </LinkContainer>
           <Navbar.Text>Signed in as: {props.user.username}</Navbar.Text>
           <LinkContainer to="/">
             <Nav.Link onClick={() => props.logout()}>Log out</Nav.Link>

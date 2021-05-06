@@ -28,6 +28,11 @@ function UnauthenticatedHeader() {
           </LinkContainer>
         </Nav>
         <Nav>
+          <LinkContainer to="/basket">
+            <Nav.Link>
+              <i className="fas fa-shopping-basket"></i>
+            </Nav.Link>
+          </LinkContainer>
           <LinkContainer to="/login">
             <Nav.Link>Login</Nav.Link>
           </LinkContainer>

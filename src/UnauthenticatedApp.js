@@ -5,6 +5,8 @@ import HomePage from "./routes/HomePage";
 import LoginPage from "./routes/LoginPage";
 import MuchDataPage from "./routes/MuchDataPage";
 import RestaurantsPage from "./routes/restaurant/RestaurantsPage";
+import BasketPage from "./routes/BasketPage";
+import CheckoutPage from "./routes/checkout/CheckoutPage";
 
 function UnauthenticatedApp(props) {
   return (
@@ -22,6 +24,12 @@ function UnauthenticatedApp(props) {
         </Route>
         <Route path="/restaurants">
           <RestaurantsPage restaurants={props.restaurants} />
+        </Route>
+        <Route path="/basket">
+          <BasketPage />
+        </Route>
+        <Route path="/checkout">
+          <CheckoutPage />
         </Route>
         <Route path="/">
           <h1>404</h1>
