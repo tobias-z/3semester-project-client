@@ -1,31 +1,31 @@
-import * as React from "react";
-import { Container, Form, Button } from "react-bootstrap";
-import { useHistory } from "react-router-dom";
-import { checkoutPages } from "./CheckoutPage";
+import * as React from "react"
+import {Container, Form, Button} from "react-bootstrap"
+import {useHistory} from "react-router-dom"
+import {checkoutPages} from "./CheckoutPage"
 
 function InformationPage(props) {
-  const { checkoutForm, handleChange } = props;
-  const history = useHistory();
+  const {checkoutForm, handleChange} = props
+  const history = useHistory()
 
-  const [isDateError, setIsDateError] = React.useState(false);
+  const [isDateError, setIsDateError] = React.useState(false)
 
   function handleSubmit(event) {
-    event.preventDefault();
-    const isValid = validate();
+    event.preventDefault()
+    const isValid = validate()
     if (isValid) {
-      history.push(checkoutPages.PAYMENT_PAGE);
+      history.push(checkoutPages.PAYMENT_PAGE)
     }
   }
 
   function validate() {
-    const chosenDate = new Date(checkoutForm.delivery);
-    const currentDate = new Date();
-    currentDate.setHours(currentDate.getHours() + 1);
+    const chosenDate = new Date(checkoutForm.delivery)
+    const currentDate = new Date()
+    currentDate.setHours(currentDate.getHours() + 1)
     if (chosenDate < currentDate) {
-      setIsDateError(true);
-      return false;
+      setIsDateError(true)
+      return false
     }
-    return true;
+    return true
   }
 
   return (
@@ -93,14 +93,14 @@ function InformationPage(props) {
             Please select a valid time/date.
           </Form.Control.Feedback>
         </Form.Group>
-        <div className="d-flex" style={{ justifyContent: "flex-end" }}>
+        <div className="d-flex" style={{justifyContent: "flex-end"}}>
           <Button type="submit" size="lg">
             Go to payment
           </Button>
         </div>
       </Form>
     </Container>
-  );
+  )
 }
 
-export default InformationPage;
+export default InformationPage

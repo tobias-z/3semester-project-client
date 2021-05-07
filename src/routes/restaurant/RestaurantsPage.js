@@ -1,12 +1,12 @@
-import * as React from "react";
-import { Col, Container, Nav, Row } from "react-bootstrap";
-import { Route, Switch, useRouteMatch } from "react-router-dom";
-import { LinkContainer } from "react-router-bootstrap";
-import Restaurant from "./Restaurant";
+import * as React from "react"
+import {Col, Container, Nav, Row} from "react-bootstrap"
+import {Route, Switch, useRouteMatch} from "react-router-dom"
+import {LinkContainer} from "react-router-bootstrap"
+import Restaurant from "./Restaurant"
 
 function RestaurantsPage(props) {
-  const { restaurants: restaurantDATA } = props;
-  let { path } = useRouteMatch();
+  const {restaurants: restaurantDATA} = props
+  let {path} = useRouteMatch()
 
   return (
     <Container>
@@ -14,9 +14,13 @@ function RestaurantsPage(props) {
         {restaurantDATA && (
           <>
             <Col md={2}>
-              <Nav className="flex-column">
-                {restaurantDATA.restaurants.map((restaurant) => (
-                  <LinkContainer to={`/restaurants/${restaurant.name}`}>
+              <Nav
+                className="flex-column"
+                style={{position: "sticky", top: 80}}>
+                {restaurantDATA.restaurants.map(restaurant => (
+                  <LinkContainer
+                    key={restaurant.description}
+                    to={`/restaurants/${restaurant.name}`}>
                     <Nav.Link>{restaurant.name}</Nav.Link>
                   </LinkContainer>
                 ))}
@@ -25,7 +29,7 @@ function RestaurantsPage(props) {
             <Col md={10}>
               <Switch>
                 <Route exact path={path}>
-                  <h3>Please select a restaurant.</h3>
+                  <h2 className="text-center">Search for a meal</h2>
                 </Route>
                 <Route path={`${path}/:name`}>
                   <Restaurant restaurantDATA={restaurantDATA} />
@@ -36,7 +40,7 @@ function RestaurantsPage(props) {
         )}
       </Row>
     </Container>
-  );
+  )
 }
 
-export default RestaurantsPage;
+export default RestaurantsPage
