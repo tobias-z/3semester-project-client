@@ -1,6 +1,7 @@
 import * as React from "react";
 import { Route, Switch } from "react-router-dom";
 import InformationPage from "./InformationPage";
+import PaymentPage from "./PaymentPage";
 
 export const checkoutPages = {
   INFO_PAGE: "/checkout",
@@ -14,7 +15,11 @@ function CheckoutPage() {
     email: "",
     phone: "",
     address: "",
-    delivery: new Date().getHours() + 1 + ":00",
+    delivery: "",
+    creditCardNumber: "",
+    expirationDate: "",
+    cardName: "",
+    securityCode: "",
   };
   const [checkoutForm, setCheckoutForm] = React.useState(initialValues);
 
@@ -32,8 +37,9 @@ function CheckoutPage() {
           handleChange={handleChange}
         />
       </Route>
-      <Route path={checkoutPages.PAYMENT_PAGE}>
+      <Route exact path={checkoutPages.PAYMENT_PAGE}>
         <p>checkoutForm={JSON.stringify(checkoutForm)}</p>;
+        <PaymentPage checkoutForm={checkoutForm} handleChange={handleChange} />
       </Route>
       <Route path={checkoutPages.CONFIRMATION_PAGE}>
         <p>Hello from confirmation</p>

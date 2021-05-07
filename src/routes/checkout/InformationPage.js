@@ -71,19 +71,15 @@ function InformationPage(props) {
             value={checkoutForm.phone}
           />
         </Form.Group>
-        <Form.Group controlId="exampleForm.ControlDelivery">
-          <Form.Label>Select time of delivery</Form.Label>
+        <Form.Group controlId="formBasicDelivery">
+          <Form.Label>Time of delivery</Form.Label>
           <Form.Control
-            as="select"
+            type="datetime-local"
             name="delivery"
             onChange={handleChange}
-            required
             value={checkoutForm.delivery}
-          >
-            {dateArray.map((date) => {
-              return <option key={date}>{date}:00</option>;
-            })}
-          </Form.Control>
+            required
+          />
         </Form.Group>
         <div className="d-flex" style={{ justifyContent: "flex-end" }}>
           <Button type="submit">Go to payment</Button>
