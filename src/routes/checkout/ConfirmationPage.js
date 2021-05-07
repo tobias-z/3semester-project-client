@@ -1,10 +1,9 @@
-import * as React from "react";
-import { Container, Button, Table } from "react-bootstrap";
-import { checkoutPages } from "./CheckoutPage";
+import * as React from "react"
+import {Container, Button, Table} from "react-bootstrap"
 
 function ConfirmationPage(props) {
-  const { checkoutForm } = props;
-  const currentDate = new Date(checkoutForm.delivery);
+  const {checkoutForm} = props
+  const currentDate = new Date(checkoutForm.delivery)
 
   function payForOrder() {
     //Make function to send order to backend
@@ -62,7 +61,7 @@ function ConfirmationPage(props) {
         </Button>
       </div>
     </Container>
-  );
+  )
 }
 
-export default ConfirmationPage;
+export default ConfirmationPage
