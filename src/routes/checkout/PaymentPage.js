@@ -13,7 +13,7 @@ function PaymentPage(props) {
   }
   return (
     <Container>
-      <h1>Enter personal card info</h1>
+      <h1>Personal card info</h1>
       <Form onSubmit={handleSubmit}>
         <Form.Group controlId="formBasicCreditCardNumber">
           <Form.Text className="text-muted">
@@ -27,6 +27,7 @@ function PaymentPage(props) {
             onChange={handleChange}
             required
             value={checkoutForm.creditCardNumber}
+            size="lg"
           />
         </Form.Group>
         <Form.Group controlId="formBasicExpirationDate">
@@ -63,7 +64,9 @@ function PaymentPage(props) {
           />
         </Form.Group>
         <div className="d-flex" style={{ justifyContent: "flex-end" }}>
-          <Button type="submit">Confirm payment</Button>
+          <Button type="submit" size="lg">
+            Confirm payment
+          </Button>
         </div>
       </Form>
     </Container>
