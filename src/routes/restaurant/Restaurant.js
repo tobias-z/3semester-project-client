@@ -59,14 +59,42 @@ function Restaurant(props) {
 
 function MenuItem(props) {
   const {isNewCategory, menu} = props
+  const [itemCount, setItemCount] = React.useState(1)
+  const isCountOne = itemCount === 1
+
+  const increment = () => setItemCount(itemCount + 1)
+  const decriment = () => setItemCount(itemCount - 1)
 
   function generateCardBody() {
     return (
       <Card.Body>
         <Card.Title>{menu.itemName}</Card.Title>
         <Card.Text>{menu.description}</Card.Text>
-        <Card.Text>{menu.price},- €</Card.Text>
-        <Button variant="secondary">Add to basket</Button>
+        <div className="d-flex">
+          <Button
+            style={{borderRadius: 0}}
+            variant="outline-secondary"
+            disabled={isCountOne}
+            onClick={decriment}>
+            -
+          </Button>
+          <Button
+            style={{borderRadius: 0}}
+            disabled
+            className="px-3"
+            variant="outline-secondary">
+            {itemCount}
+          </Button>
+          <Button
+            style={{borderRadius: 0}}
+            variant="outline-secondary"
+            onClick={increment}>
+            +
+          </Button>
+          <Button className="ml-3 w-50" variant="secondary">
+            {menu.price * itemCount}, - €
+          </Button>
+        </div>
       </Card.Body>
     )
   }
