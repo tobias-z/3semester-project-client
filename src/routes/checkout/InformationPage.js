@@ -5,22 +5,27 @@ import { checkoutPages } from "./CheckoutPage";
 
 function InformationPage(props) {
   const { checkoutForm, handleChange } = props;
-  const [dateArray, setDateArray] = React.useState([]);
   const history = useHistory();
 
-  React.useEffect(() => {
-    const updatedDate = new Array(14).fill(new Date()).map((date, index) => {
-      let dateToReturn = date.getHours() + 1 + index;
-      if (dateToReturn >= 25) {
-        dateToReturn = 0 + index;
-      }
-      return dateToReturn;
-    });
-    setDateArray(updatedDate);
-  }, []);
+  const [isDateError, setIsDateError] = React.useState(false);
+
   function handleSubmit(event) {
     event.preventDefault();
-    history.push(checkoutPages.PAYMENT_PAGE);
+    const isValid = validate();
+    if (isValid) {
+      history.push(checkoutPages.PAYMENT_PAGE);
+    }
+  }
+
+  function validate() {
+    const chosenDate = new Date(checkoutForm.delivery);
+    const currentDate = new Date();
+    currentDate.setHours(currentDate.getHours() + 1);
+    if (chosenDate < currentDate) {
+      setIsDateError(true);
+      return false;
+    }
+    return true;
   }
 
   return (
@@ -79,7 +84,14 @@ function InformationPage(props) {
             onChange={handleChange}
             value={checkoutForm.delivery}
             required
+            isInvalid={isDateError}
           />
+          <Form.Text className="text-muted">
+            We do not support deliveries within an hour.
+          </Form.Text>
+          <Form.Control.Feedback type="invalid">
+            Please select a valid time/date.
+          </Form.Control.Feedback>
         </Form.Group>
         <div className="d-flex" style={{ justifyContent: "flex-end" }}>
           <Button type="submit">Go to payment</Button>
