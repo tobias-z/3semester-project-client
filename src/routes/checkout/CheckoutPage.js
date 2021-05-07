@@ -1,5 +1,6 @@
 import * as React from "react";
 import { Route, Switch } from "react-router-dom";
+import ConfirmationPage from "./ConfirmationPage";
 import InformationPage from "./InformationPage";
 import PaymentPage from "./PaymentPage";
 
@@ -38,11 +39,10 @@ function CheckoutPage() {
         />
       </Route>
       <Route exact path={checkoutPages.PAYMENT_PAGE}>
-        <p>checkoutForm={JSON.stringify(checkoutForm)}</p>;
         <PaymentPage checkoutForm={checkoutForm} handleChange={handleChange} />
       </Route>
       <Route path={checkoutPages.CONFIRMATION_PAGE}>
-        <p>Hello from confirmation</p>
+        <ConfirmationPage checkoutForm={checkoutForm} />
       </Route>
     </Switch>
   );

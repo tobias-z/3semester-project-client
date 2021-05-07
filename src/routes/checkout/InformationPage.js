@@ -30,7 +30,7 @@ function InformationPage(props) {
 
   return (
     <Container>
-      <h1>Enter personal contact info</h1>
+      <h1>Personal contact info</h1>
       <Form onSubmit={handleSubmit}>
         <Form.Group controlId="formBasicEmail">
           <Form.Label>Email address</Form.Label>
@@ -94,7 +94,9 @@ function InformationPage(props) {
           </Form.Control.Feedback>
         </Form.Group>
         <div className="d-flex" style={{ justifyContent: "flex-end" }}>
-          <Button type="submit">Go to payment</Button>
+          <Button type="submit" size="lg">
+            Go to payment
+          </Button>
         </div>
       </Form>
     </Container>
