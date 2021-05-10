@@ -5,7 +5,6 @@ import {LinkContainer} from "react-router-bootstrap"
 import Restaurant from "./Restaurant"
 
 function RestaurantsPage(props) {
-  const [refs, setRefs] = React.useState([])
   const {restaurants: restaurantDATA} = props
   let {path} = useRouteMatch()
 
@@ -22,7 +21,6 @@ function RestaurantsPage(props) {
                   {restaurantDATA.restaurants.map(restaurant => (
                     <RestaurantLinkAccordion
                       key={restaurant.description}
-                      setRefs={setRefs}
                       restaurant={restaurant}
                     />
                   ))}
@@ -47,7 +45,7 @@ function RestaurantsPage(props) {
 }
 
 function RestaurantLinkAccordion(props) {
-  const {restaurant, setRefs} = props
+  const {restaurant} = props
   let lastCategory
 
   return (
@@ -70,7 +68,6 @@ function RestaurantLinkAccordion(props) {
                   const menuItem = document.getElementById(menu.category)
                   menuItem.scrollIntoView({
                     behavior: "smooth",
-                    block: "start",
                   })
                 }
 
