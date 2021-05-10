@@ -1,6 +1,7 @@
 import * as React from "react"
 import {Button, Card} from "react-bootstrap"
 import {useParams} from "react-router-dom"
+import {sortRestaurants} from "./RestaurantsPage"
 
 function Restaurant(props) {
   const {restaurantDATA} = props
@@ -24,32 +25,20 @@ function Restaurant(props) {
             <h4>{restaurant.description}</h4>
           </div>
           <div className="mt-5">
-            {restaurant.menus
-              .sort((menu, menu2) => {
-                const x = menu.category.toLowerCase()
-                const y = menu2.category.toLowerCase()
-                if (x < y) {
-                  return 1
-                }
-                if (x > y) {
-                  return -1
-                }
-                return 0
-              })
-              .map(menu => {
-                let isNewCategory = false
-                if (lastCategory !== menu.category) {
-                  isNewCategory = true
-                  lastCategory = menu.category
-                }
-                return (
-                  <MenuItem
-                    key={menu.id}
-                    menu={menu}
-                    isNewCategory={isNewCategory}
-                  />
-                )
-              })}
+            {restaurant.menus.sort(sortRestaurants).map(menu => {
+              let isNewCategory = false
+              if (lastCategory !== menu.category) {
+                isNewCategory = true
+                lastCategory = menu.category
+              }
+              return (
+                <MenuItem
+                  key={menu.id}
+                  menu={menu}
+                  isNewCategory={isNewCategory}
+                />
+              )
+            })}
           </div>
         </>
       )}
