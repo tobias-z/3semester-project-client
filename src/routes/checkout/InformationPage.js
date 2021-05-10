@@ -13,7 +13,7 @@ function InformationPage(props) {
     event.preventDefault()
     const isValid = validate()
     if (isValid) {
-      history.push(checkoutPages.PAYMENT_PAGE)
+      history.push(checkoutPages.CONFIRMATION_PAGE)
     }
   }
 

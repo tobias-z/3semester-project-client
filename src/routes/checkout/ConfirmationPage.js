@@ -1,12 +1,15 @@
 import * as React from "react"
 import {Container, Button, Table} from "react-bootstrap"
+import {useHistory} from "react-router-dom"
+import {checkoutPages} from "./CheckoutPage"
 
 function ConfirmationPage(props) {
+  const history = useHistory()
   const {checkoutForm} = props
   const currentDate = new Date(checkoutForm.delivery)
 
-  function payForOrder() {
-    //Make function to send order to backend
+  function handleAcceptOfOrder() {
+    history.push(checkoutPages.PAYMENT_PAGE)
   }
 
   return (
@@ -56,7 +59,7 @@ function ConfirmationPage(props) {
           {currentDate.getUTCMinutes()} - {currentDate.getDate()}/
           {currentDate.getUTCMonth() + 1}/{currentDate.getFullYear()}
         </h4>
-        <Button onClick={payForOrder} block size="lg" variant="success">
+        <Button onClick={handleAcceptOfOrder} block size="lg" variant="success">
           Confirm order
         </Button>
       </div>

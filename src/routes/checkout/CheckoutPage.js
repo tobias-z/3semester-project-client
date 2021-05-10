@@ -1,14 +1,14 @@
-import * as React from "react";
-import { Route, Switch } from "react-router-dom";
-import ConfirmationPage from "./ConfirmationPage";
-import InformationPage from "./InformationPage";
-import PaymentPage from "./PaymentPage";
+import * as React from "react"
+import {Route, Switch} from "react-router-dom"
+import ConfirmationPage from "./ConfirmationPage"
+import InformationPage from "./InformationPage"
+import PaymentPage from "./PaymentPage"
 
 export const checkoutPages = {
   INFO_PAGE: "/checkout",
-  PAYMENT_PAGE: "/checkout/payment",
-  CONFIRMATION_PAGE: "/checkout/payment/confirmation",
-};
+  PAYMENT_PAGE: "/checkout/confirmation/payment",
+  CONFIRMATION_PAGE: "/checkout/confirmation",
+}
 
 function CheckoutPage() {
   const initialValues = {
@@ -21,14 +21,14 @@ function CheckoutPage() {
     expirationDate: "",
     cardName: "",
     securityCode: "",
-  };
-  const [checkoutForm, setCheckoutForm] = React.useState(initialValues);
+  }
+  const [checkoutForm, setCheckoutForm] = React.useState(initialValues)
 
   function handleChange(event) {
     setCheckoutForm({
       ...checkoutForm,
       [event.target.name]: event.target.value,
-    });
+    })
   }
   return (
     <Switch>
@@ -38,14 +38,14 @@ function CheckoutPage() {
           handleChange={handleChange}
         />
       </Route>
-      <Route exact path={checkoutPages.PAYMENT_PAGE}>
-        <PaymentPage checkoutForm={checkoutForm} handleChange={handleChange} />
-      </Route>
-      <Route path={checkoutPages.CONFIRMATION_PAGE}>
+      <Route exact path={checkoutPages.CONFIRMATION_PAGE}>
         <ConfirmationPage checkoutForm={checkoutForm} />
       </Route>
+      <Route path={checkoutPages.PAYMENT_PAGE}>
+        <PaymentPage checkoutForm={checkoutForm} handleChange={handleChange} />
+      </Route>
     </Switch>
-  );
+  )
 }
 
-export default CheckoutPage;
+export default CheckoutPage

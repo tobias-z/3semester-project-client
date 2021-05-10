@@ -1,41 +1,42 @@
-import * as React from "react";
-import { Container, Form, Button } from "react-bootstrap";
-import { useHistory } from "react-router-dom";
-import { checkoutPages } from "./CheckoutPage";
+import * as React from "react"
+import {Form, Button} from "react-bootstrap"
+import CenteredContainer from "../../components/CenteredContainer"
+import {useHistory} from "react-router-dom"
+import {checkoutPages} from "./CheckoutPage"
 
 function PaymentPage(props) {
-  const { checkoutForm, handleChange } = props;
-  const history = useHistory();
+  const {checkoutForm, handleChange} = props
+  const history = useHistory()
 
   function handleSubmit(e) {
-    e.preventDefault();
-    history.push(checkoutPages.CONFIRMATION_PAGE);
+    e.preventDefault()
+    history.push(checkoutPages.CONFIRMATION_PAGE)
   }
   return (
-    <Container>
-      <h1>Personal card info</h1>
+    <CenteredContainer>
+      <h1>Payment Details</h1>
       <Form onSubmit={handleSubmit}>
         <Form.Group controlId="formBasicCreditCardNumber">
-          <Form.Text className="text-muted">
-            We'll never share your card information with anyone else.
-          </Form.Text>
           <Form.Label>Credit card number</Form.Label>
           <Form.Control
             name="creditCardNumber"
             type="text"
-            placeholder="Enter credit card number"
+            placeholder="XXXX-XXXX-XXXX-XXXX"
             onChange={handleChange}
             required
             value={checkoutForm.creditCardNumber}
             size="lg"
           />
+          <Form.Text className="text-muted">
+            We'll never share your card information with anyone else.
+          </Form.Text>
         </Form.Group>
         <Form.Group controlId="formBasicExpirationDate">
           <Form.Label>Card expiration date</Form.Label>
           <Form.Control
             name="expirationDate"
             type="text"
-            placeholder="Enter card expiration date"
+            placeholder="MM/YY"
             onChange={handleChange}
             required
             value={checkoutForm.expirationDate}
@@ -46,7 +47,6 @@ function PaymentPage(props) {
           <Form.Control
             name="cardName"
             type="text"
-            placeholder="Enter card name"
             onChange={handleChange}
             required
             value={checkoutForm.cardName}
@@ -63,14 +63,14 @@ function PaymentPage(props) {
             value={checkoutForm.securityCode}
           />
         </Form.Group>
-        <div className="d-flex" style={{ justifyContent: "flex-end" }}>
-          <Button type="submit" size="lg">
+        <div className="d-flex" style={{justifyContent: "flex-end"}}>
+          <Button block type="submit" size="lg">
             Confirm payment
           </Button>
         </div>
       </Form>
-    </Container>
-  );
+    </CenteredContainer>
+  )
 }
 
-export default PaymentPage;
+export default PaymentPage
