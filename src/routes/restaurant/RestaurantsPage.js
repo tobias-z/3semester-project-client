@@ -5,6 +5,7 @@ import {LinkContainer} from "react-router-bootstrap"
 import Restaurant from "./Restaurant"
 
 function RestaurantsPage(props) {
+  const [refs, setRefs] = React.useState([])
   const {restaurants: restaurantDATA} = props
   let {path} = useRouteMatch()
 
@@ -21,6 +22,7 @@ function RestaurantsPage(props) {
                   {restaurantDATA.restaurants.map(restaurant => (
                     <RestaurantLinkAccordion
                       key={restaurant.description}
+                      setRefs={setRefs}
                       restaurant={restaurant}
                     />
                   ))}
@@ -44,21 +46,10 @@ function RestaurantsPage(props) {
   )
 }
 
-export function sortRestaurants(menu, menu2) {
-  const x = menu.category.toLowerCase()
-  const y = menu2.category.toLowerCase()
-  if (x < y) {
-    return 1
-  }
-  if (x > y) {
-    return -1
-  }
-  return 0
-}
-
 function RestaurantLinkAccordion(props) {
-  const {restaurant} = props
+  const {restaurant, setRefs} = props
   let lastCategory
+
   return (
     <LinkContainer
       key={restaurant.description}
@@ -75,8 +66,23 @@ function RestaurantLinkAccordion(props) {
           <Card.Body>
             {restaurant.menus.sort(sortRestaurants).map(menu => {
               if (lastCategory !== menu.category) {
+                function handleClick() {
+                  const menuItem = document.getElementById(menu.category)
+                  menuItem.scrollIntoView({
+                    behavior: "smooth",
+                    block: "start",
+                  })
+                }
+
                 lastCategory = menu.category
-                return <p key={menu.id}>{menu.category}</p>
+                return (
+                  <p
+                    onClick={handleClick}
+                    key={menu.id}
+                    className="menu-category">
+                    {menu.category}
+                  </p>
+                )
               }
               return null
             })}
@@ -85,6 +91,18 @@ function RestaurantLinkAccordion(props) {
       </Card>
     </LinkContainer>
   )
+}
+
+export function sortRestaurants(menu, menu2) {
+  const x = menu.category.toLowerCase()
+  const y = menu2.category.toLowerCase()
+  if (x < y) {
+    return 1
+  }
+  if (x > y) {
+    return -1
+  }
+  return 0
 }
 
 export default RestaurantsPage

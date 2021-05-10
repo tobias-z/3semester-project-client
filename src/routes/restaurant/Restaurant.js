@@ -93,7 +93,7 @@ function MenuItem(props) {
       <>
         <div className="bg-light py-2">
           {" "}
-          <h3 className="pl-3 mt-1">
+          <h3 className="pl-3 mt-1" id={menu.category}>
             <strong>{menu.category}</strong>
           </h3>{" "}
         </div>
