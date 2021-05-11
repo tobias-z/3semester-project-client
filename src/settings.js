@@ -3,10 +3,15 @@ const INFO_BASE =
   "https://ditlevsoftware.com/tomcat/insession-sem-project/api/info";
 const RESTAURANT_BASE =
   "https://ditlevsoftware.com/tomcat/insession-sem-project/api/restaurants";
+const BASKET_BASE =
+  "https://ditlevsoftware.com/tomcat/insession-sem-project/api/basket";
 
+const BASKET = {
+  ADD: `${BASKET_BASE}/add/`,
+  ACTIVE: `${BASKET_BASE}/active`,
+};
 const USER = {
   LOGIN: `${USER_BASE}/login`,
-  BASKET_ADD: `${USER_BASE}/basket/add/`,
 };
 
 const INFO = {
@@ -20,4 +25,4 @@ const RESTAURANT = {
   ALL: `${RESTAURANT_BASE}`,
 };
 
-export { USER, INFO, RESTAURANT };
+export { USER, INFO, RESTAURANT, BASKET };

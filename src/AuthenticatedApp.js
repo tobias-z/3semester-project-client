@@ -2,6 +2,7 @@ import * as React from "react";
 import { Route, BrowserRouter as Router, Switch } from "react-router-dom";
 import AuthenticatedHeader from "./components/AuthenticatedHeader";
 import AdminPage from "./routes/AdminPage";
+import BasketPage from "./routes/basket/BasketPage";
 import HomePage from "./routes/HomePage";
 import MuchDataPage from "./routes/MuchDataPage";
 import RestaurantsPage from "./routes/restaurant/RestaurantsPage";
@@ -24,6 +25,9 @@ function AuthenticatedApp(props) {
         </Route>
         <Route path="/admin">
           <AdminPage />
+        </Route>
+        <Route path="/basket/active">
+          <BasketPage />
         </Route>
         <Route path="/restaurants">
           <RestaurantsPage restaurants={props.restaurants} user={user} />

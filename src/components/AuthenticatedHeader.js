@@ -1,6 +1,6 @@
-import * as React from "react"
-import {Nav, Navbar} from "react-bootstrap"
-import {LinkContainer} from "react-router-bootstrap"
+import * as React from "react";
+import { Nav, Navbar } from "react-bootstrap";
+import { LinkContainer } from "react-router-bootstrap";
 
 function AuthenticatedHeader(props) {
   return (
@@ -10,7 +10,8 @@ function AuthenticatedHeader(props) {
       expand="lg"
       bg="dark"
       sticky="top"
-      variant="dark">
+      variant="dark"
+    >
       <LinkContainer to="/">
         <Navbar.Brand>inSession Startcode</Navbar.Brand>
       </LinkContainer>
@@ -34,19 +35,21 @@ function AuthenticatedHeader(props) {
           </LinkContainer>
         </Nav>
         <Nav>
-          <LinkContainer to="/basket">
+          <LinkContainer to="/basket/active">
             <Nav.Link>
               <i class="fas fa-shopping-basket"></i>
             </Nav.Link>
           </LinkContainer>
-          <Navbar.Text>Signed in as: {props.user.username}</Navbar.Text>
+          <Navbar.Text>
+            Signed in as: {localStorage.getItem("user")}
+          </Navbar.Text>
           <LinkContainer to="/">
             <Nav.Link onClick={() => props.logout()}>Log out</Nav.Link>
           </LinkContainer>
         </Nav>
       </Navbar.Collapse>
     </Navbar>
-  )
+  );
 }
 
-export default AuthenticatedHeader
+export default AuthenticatedHeader;

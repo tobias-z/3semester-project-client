@@ -3,10 +3,10 @@ import { Button, Card, Toast } from "react-bootstrap";
 import { useParams } from "react-router-dom";
 import { fetchData, handleError } from "../../apiUtils";
 import { sortRestaurants } from "./RestaurantsPage";
-import { USER } from "../../settings";
+import { BASKET } from "../../settings";
 
 function Restaurant(props) {
-  const { restaurantDATA, user } = props;
+  const { restaurantDATA } = props;
   let { name } = useParams();
 
   const [restaurant, setRestaurant] = React.useState();
@@ -56,7 +56,6 @@ function Restaurant(props) {
                   setChosenMenu={setChosenMenu}
                   toggleShow={toggleShow}
                   restaurant={restaurant}
-                  user={user}
                 />
               );
             })}
@@ -68,14 +67,7 @@ function Restaurant(props) {
 }
 
 function MenuItem(props) {
-  const {
-    isNewCategory,
-    menu,
-    setChosenMenu,
-    toggleShow,
-    restaurant,
-    user,
-  } = props;
+  const { isNewCategory, menu, setChosenMenu, toggleShow, restaurant } = props;
   const [itemCount, setItemCount] = React.useState(1);
   const [err, setErr] = React.useState();
   const isCountOne = itemCount === 1;
@@ -97,7 +89,7 @@ function MenuItem(props) {
     chosenItem.amount = itemCount;
     chosenItem.price = menu.price;
 
-    fetchData(USER.BASKET_ADD + user.username, "POST", chosenItem)
+    fetchData(BASKET.ADD, "POST", chosenItem)
       .then(setChosenMenu({ menu, itemCount }), toggleShow())
       .catch((err) => handleError(err, setErr));
     console.log(chosenItem);

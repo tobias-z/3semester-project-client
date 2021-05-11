@@ -5,7 +5,7 @@ import HomePage from "./routes/HomePage"
 import LoginPage from "./routes/LoginPage"
 import MuchDataPage from "./routes/MuchDataPage"
 import RestaurantsPage from "./routes/restaurant/RestaurantsPage"
-import BasketPage from "./routes/BasketPage"
+import BasketPage from "./routes/basket/BasketPage"
 import CheckoutPage from "./routes/checkout/CheckoutPage"
 import ScrollToTop from "./components/ScrollToTop"
 

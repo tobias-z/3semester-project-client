@@ -30,6 +30,14 @@ function App() {
     setUser(null);
   }
 
+  React.useEffect(() => {
+    const loggedInUser = localStorage.getItem("user");
+    if (loggedInUser) {
+      const foundUser = loggedInUser;
+      setUser(foundUser);
+    }
+  }, []);
+
   // Whenever the user changes the app is rerendered
   return user ? (
     <AuthenticatedApp user={user} logout={logout} restaurants={restaurants} />
