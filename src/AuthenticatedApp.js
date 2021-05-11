@@ -26,7 +26,7 @@ function AuthenticatedApp(props) {
           <AdminPage />
         </Route>
         <Route path="/restaurants">
-          <RestaurantsPage restaurants={props.restaurants} />
+          <RestaurantsPage restaurants={props.restaurants} user={user} />
         </Route>
         <Route path="/">
           <h1>404</h1>

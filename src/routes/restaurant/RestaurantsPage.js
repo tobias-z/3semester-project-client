@@ -5,7 +5,7 @@ import {LinkContainer} from "react-router-bootstrap"
 import Restaurant from "./Restaurant"
 
 function RestaurantsPage(props) {
-  const {restaurants: restaurantDATA} = props
+  const {restaurants: restaurantDATA, user} = props
   let {path} = useRouteMatch()
 
   return (
@@ -33,7 +33,7 @@ function RestaurantsPage(props) {
                   <h2 className="text-center">Search for a meal</h2>
                 </Route>
                 <Route path={`${path}/:name`}>
-                  <Restaurant restaurantDATA={restaurantDATA} />
+                  <Restaurant restaurantDATA={restaurantDATA} user={user}/>
                 </Route>
               </Switch>
             </Col>

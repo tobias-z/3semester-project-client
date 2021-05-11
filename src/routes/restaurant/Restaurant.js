@@ -1,10 +1,12 @@
 import * as React from "react";
 import { Button, Card, Toast } from "react-bootstrap";
 import { useParams } from "react-router-dom";
+import { fetchData, handleError } from "../../apiUtils";
 import { sortRestaurants } from "./RestaurantsPage";
+import { USER } from "../../settings";
 
 function Restaurant(props) {
-  const { restaurantDATA } = props;
+  const { restaurantDATA, user } = props;
   let { name } = useParams();
 
   const [restaurant, setRestaurant] = React.useState();
@@ -53,6 +55,8 @@ function Restaurant(props) {
                   isNewCategory={isNewCategory}
                   setChosenMenu={setChosenMenu}
                   toggleShow={toggleShow}
+                  restaurant={restaurant}
+                  user={user}
                 />
               );
             })}
@@ -64,17 +68,39 @@ function Restaurant(props) {
 }
 
 function MenuItem(props) {
-  const { isNewCategory, menu, setChosenMenu, toggleShow } = props;
+  const {
+    isNewCategory,
+    menu,
+    setChosenMenu,
+    toggleShow,
+    restaurant,
+    user,
+  } = props;
   const [itemCount, setItemCount] = React.useState(1);
+  const [err, setErr] = React.useState();
   const isCountOne = itemCount === 1;
 
   const increment = () => setItemCount(itemCount + 1);
   const decriment = () => setItemCount(itemCount - 1);
 
-  function handleInputBasket() {
+  function handleInputBasket(restaurant) {
+    const chosenItem = {
+      restaurantName: "",
+      dishNumber: "",
+      amount: "",
+      price: "",
+    };
     // put setChosenMenu and toggleShow into .then for our fetch function when the endpoint is ready
-    setChosenMenu({ menu, itemCount });
-    toggleShow();
+    // restaurant name, dishNumber(id), amount, price
+    chosenItem.dishNumber = menu.id;
+    chosenItem.restaurantName = restaurant.name;
+    chosenItem.amount = itemCount;
+    chosenItem.price = menu.price;
+
+    fetchData(USER.BASKET_ADD + user.username, "POST", chosenItem)
+      .then(setChosenMenu({ menu, itemCount }), toggleShow())
+      .catch((err) => handleError(err, setErr));
+    console.log(chosenItem);
   }
   function generateCardBody() {
     return (
@@ -108,10 +134,13 @@ function MenuItem(props) {
           <Button
             className="ml-3 w-50"
             variant="secondary"
-            onClick={handleInputBasket}
+            onClick={() => handleInputBasket(restaurant)}
           >
             {menu.price * itemCount}, - €
           </Button>
+
+          <br />
+          {err && <h4>{err.message}</h4>}
         </div>
       </Card.Body>
     );
