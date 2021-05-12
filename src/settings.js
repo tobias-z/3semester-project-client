@@ -9,9 +9,11 @@ const BASKET_BASE =
 const BASKET = {
   ADD: `${BASKET_BASE}/add/`,
   ACTIVE: `${BASKET_BASE}/active`,
+  EDIT: `${BASKET_BASE}`,
 };
 const USER = {
   LOGIN: `${USER_BASE}/login`,
+  SIGNUP: `${USER_BASE}`
 };
 
 const INFO = {

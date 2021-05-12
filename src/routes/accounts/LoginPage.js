@@ -1,6 +1,6 @@
 import { Button, Form } from "react-bootstrap";
 import React from "react";
-import CenteredContainer from "../components/CenteredContainer";
+import CenteredContainer from "../../components/CenteredContainer";
 import { useHistory } from "react-router";
 
 const initialValues = {
@@ -28,7 +28,6 @@ function LoginPage(props) {
     });
   }
 
-  
   return (
     <CenteredContainer>
       <h1>Sign in</h1>

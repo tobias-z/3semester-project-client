@@ -1,13 +1,14 @@
-import * as React from "react"
-import {BrowserRouter as Router, Switch, Route} from "react-router-dom"
-import UnauthenticatedHeader from "./components/UnauthenticatedHeader"
-import HomePage from "./routes/HomePage"
-import LoginPage from "./routes/LoginPage"
-import MuchDataPage from "./routes/MuchDataPage"
-import RestaurantsPage from "./routes/restaurant/RestaurantsPage"
-import BasketPage from "./routes/basket/BasketPage"
-import CheckoutPage from "./routes/checkout/CheckoutPage"
-import ScrollToTop from "./components/ScrollToTop"
+import * as React from "react";
+import { BrowserRouter as Router, Switch, Route } from "react-router-dom";
+import UnauthenticatedHeader from "./components/UnauthenticatedHeader";
+import HomePage from "./routes/HomePage";
+import LoginPage from "./routes/accounts/LoginPage";
+import MuchDataPage from "./routes/MuchDataPage";
+import RestaurantsPage from "./routes/restaurant/RestaurantsPage";
+import BasketPage from "./routes/basket/BasketPage";
+import CheckoutPage from "./routes/checkout/CheckoutPage";
+import ScrollToTop from "./components/ScrollToTop";
+import SignupPage from "./routes/accounts/SignupPage";
 
 function UnauthenticatedApp(props) {
   return (
@@ -20,6 +21,9 @@ function UnauthenticatedApp(props) {
           </Route>
           <Route path="/login">
             <LoginPage login={props.login} />
+          </Route>
+          <Route path="/signup">
+            <SignupPage />
           </Route>
           <Route path="/muchdata">
             <MuchDataPage />
@@ -39,7 +43,7 @@ function UnauthenticatedApp(props) {
         </Switch>
       </ScrollToTop>
     </Router>
-  )
+  );
 }
 
-export default UnauthenticatedApp
+export default UnauthenticatedApp;

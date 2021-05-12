@@ -4,9 +4,10 @@ import { useParams } from "react-router-dom";
 import { fetchData, handleError } from "../../apiUtils";
 import { sortRestaurants } from "./RestaurantsPage";
 import { BASKET } from "../../settings";
+import BasketPage from "../basket/BasketPage";
 
 function Restaurant(props) {
-  const { restaurantDATA } = props;
+  const { restaurantDATA, loadBasketCount } = props;
   let { name } = useParams();
 
   const [restaurant, setRestaurant] = React.useState();
@@ -56,6 +57,7 @@ function Restaurant(props) {
                   setChosenMenu={setChosenMenu}
                   toggleShow={toggleShow}
                   restaurant={restaurant}
+                  loadBasketCount={loadBasketCount}
                 />
               );
             })}
@@ -67,7 +69,14 @@ function Restaurant(props) {
 }
 
 function MenuItem(props) {
-  const { isNewCategory, menu, setChosenMenu, toggleShow, restaurant } = props;
+  const {
+    isNewCategory,
+    menu,
+    setChosenMenu,
+    toggleShow,
+    restaurant,
+    loadBasketCount,
+  } = props;
   const [itemCount, setItemCount] = React.useState(1);
   const [err, setErr] = React.useState();
   const isCountOne = itemCount === 1;
@@ -82,18 +91,18 @@ function MenuItem(props) {
       amount: "",
       price: "",
     };
-    // put setChosenMenu and toggleShow into .then for our fetch function when the endpoint is ready
-    // restaurant name, dishNumber(id), amount, price
     chosenItem.dishNumber = menu.id;
     chosenItem.restaurantName = restaurant.name;
     chosenItem.amount = itemCount;
     chosenItem.price = menu.price;
 
     fetchData(BASKET.ADD, "POST", chosenItem)
-      .then(setChosenMenu({ menu, itemCount }), toggleShow())
+      .then(() => setChosenMenu({ menu, itemCount }), toggleShow())
+      .then(() => loadBasketCount())
       .catch((err) => handleError(err, setErr));
     console.log(chosenItem);
   }
+
   function generateCardBody() {
     return (
       <Card.Body>

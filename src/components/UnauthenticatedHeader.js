@@ -1,6 +1,6 @@
-import * as React from "react"
-import {Nav, Navbar} from "react-bootstrap"
-import {LinkContainer} from "react-router-bootstrap"
+import * as React from "react";
+import { Nav, Navbar } from "react-bootstrap";
+import { LinkContainer } from "react-router-bootstrap";
 
 function UnauthenticatedHeader() {
   return (
@@ -10,7 +10,8 @@ function UnauthenticatedHeader() {
       expand="lg"
       bg="dark"
       sticky="top"
-      variant="dark">
+      variant="dark"
+    >
       <LinkContainer to="/">
         <Navbar.Brand>inSession Startcode</Navbar.Brand>
       </LinkContainer>
@@ -20,26 +21,21 @@ function UnauthenticatedHeader() {
           <LinkContainer exact to="/">
             <Nav.Link>Home</Nav.Link>
           </LinkContainer>
-          <LinkContainer to="/muchdata">
-            <Nav.Link>Much data</Nav.Link>
-          </LinkContainer>
           <LinkContainer to="/restaurants">
             <Nav.Link>Restaurants</Nav.Link>
           </LinkContainer>
         </Nav>
         <Nav>
-          <LinkContainer to="/basket">
-            <Nav.Link>
-              <i className="fas fa-shopping-basket"></i>
-            </Nav.Link>
-          </LinkContainer>
           <LinkContainer to="/login">
             <Nav.Link>Login</Nav.Link>
+          </LinkContainer>
+          <LinkContainer to="/signup">
+            <Nav.Link>Signup</Nav.Link>
           </LinkContainer>
         </Nav>
       </Navbar.Collapse>
     </Navbar>
-  )
+  );
 }
 
-export default UnauthenticatedHeader
+export default UnauthenticatedHeader;

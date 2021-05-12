@@ -1,6 +1,8 @@
 import * as React from "react";
 import { Nav, Navbar } from "react-bootstrap";
 import { LinkContainer } from "react-router-bootstrap";
+import { fetchData } from "../apiUtils";
+import { BASKET } from "../settings";
 
 function AuthenticatedHeader(props) {
   return (
@@ -37,7 +39,11 @@ function AuthenticatedHeader(props) {
         <Nav>
           <LinkContainer to="/basket/active">
             <Nav.Link>
-              <i class="fas fa-shopping-basket"></i>
+              <i class="fas fa-shopping-basket">
+                <span>
+                  :{props.activeBasket && props.activeBasket.items.length}
+                </span>
+              </i>
             </Nav.Link>
           </LinkContainer>
           <Navbar.Text>
