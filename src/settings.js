@@ -13,7 +13,7 @@ const BASKET = {
 };
 const USER = {
   LOGIN: `${USER_BASE}/login`,
-  SIGNUP: `${USER_BASE}`
+  SIGNUP: `${USER_BASE}/user`,
 };
 
 const INFO = {

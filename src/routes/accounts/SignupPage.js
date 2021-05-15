@@ -1,24 +1,27 @@
 import React from "react";
 import { Form, Button } from "react-bootstrap";
+import { useHistory } from "react-router";
 import { fetchData } from "../../apiUtils";
 import CenteredContainer from "../../components/CenteredContainer";
 import { USER } from "../../settings";
+import LoginPage from "./LoginPage";
 
 const initialValues = {
-  username: "",
+  userName: "",
   password: "",
 };
 
 function SignupPage() {
-  const [signupCredentials, setSignupCredentials] = React.useState(
-    initialValues
-  );
+  const [signupCredentials, setSignupCredentials] =
+    React.useState(initialValues);
+
   const [serverError, setServerError] = React.useState(null);
+  const history = useHistory();
 
   function handleSubmit(event) {
     event.preventDefault();
     console.log(signupCredentials);
-    fetchData(USER.SIGNUP, "POST", signupCredentials);
+    fetchData(USER.SIGNUP, "POST", signupCredentials).then();
   }
 
   function handleChange(event) {
@@ -39,7 +42,7 @@ function SignupPage() {
           <Form.Label>Username</Form.Label>
           <Form.Control
             type="text"
-            name="username"
+            name="userName"
             value={signupCredentials.username}
             onChange={handleChange}
             placeholder="Enter username"

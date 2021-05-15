@@ -3,6 +3,7 @@ import { Accordion, Card, Col, Container, Nav, Row } from "react-bootstrap";
 import { Route, Switch, useRouteMatch } from "react-router-dom";
 import { LinkContainer } from "react-router-bootstrap";
 import Restaurant from "./Restaurant";
+import Search from "./Search";
 
 function RestaurantsPage(props) {
   const { restaurants: restaurantDATA, loadBasketCount } = props;
@@ -32,6 +33,10 @@ function RestaurantsPage(props) {
               <Switch>
                 <Route exact path={path}>
                   <h2 className="text-center">Search for a meal</h2>
+                  <Search
+                    loadBasketCount={loadBasketCount}
+                    restaurantDATA={restaurantDATA}
+                  />
                 </Route>
                 <Route path={`${path}/:name`}>
                   <Restaurant

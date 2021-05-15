@@ -9,8 +9,15 @@ function login(credentials) {
   });
 }
 
+
+
 function getDataFromServer() {
   return fetchData(INFO.USER);
+}
+
+function loggedIn() {
+  var token = this.AuthToken.getToken();
+  return fetchData(USER.LOGIN + "/validate-token", https.GET, {Headers: {'x-access-token': token}})
 }
 
 const setToken = (token) => localStorage.setItem("jwtToken", token);
@@ -19,4 +26,11 @@ const isLoggedIn = () => getToken() != null;
 const logout = () =>
   localStorage.removeItem("jwtToken") + localStorage.removeItem("user");
 
-export { setToken, getToken, isLoggedIn, login, logout, getDataFromServer };
+export {
+  setToken,
+  getToken,
+  isLoggedIn,
+  login,
+  logout,
+  getDataFromServer,
+};
