@@ -3,7 +3,7 @@ import AuthenticatedApp from "./AuthenticatedApp";
 import UnauthenticatedApp from "./UnauthenticatedApp";
 import * as facade from "./facades/userFacade";
 import { fetchData, handleError } from "./apiUtils";
-import { RESTAURANT } from "./settings";
+import { RESTAURANT, USER } from "./settings";
 
 function App() {
   const [user, setUser] = React.useState(null);
@@ -31,11 +31,9 @@ function App() {
   }
 
   React.useEffect(() => {
-    const loggedInUser = localStorage.getItem("user");
-    if (loggedInUser) {
-      const foundUser = loggedInUser;
-      setUser(foundUser);
-    }
+    fetchData(USER.LOGIN + "/validate-token").then((userLogged) =>
+      setUser(userLogged.username)
+    );
   }, []);
 
   // Whenever the user changes the app is rerendered
