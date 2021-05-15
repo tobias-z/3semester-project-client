@@ -1,16 +1,36 @@
-import * as React from "react"
-import {Form, Button} from "react-bootstrap"
-import CenteredContainer from "../../components/CenteredContainer"
-import {useHistory} from "react-router-dom"
-import {checkoutPages} from "./CheckoutPage"
+import * as React from "react";
+import { Form, Button } from "react-bootstrap";
+import CenteredContainer from "../../components/CenteredContainer";
+import { useHistory } from "react-router-dom";
+import { checkoutPages } from "./CheckoutPage";
+import { fetchData } from "../../apiUtils";
+import { ORDER } from "../../settings";
 
 function PaymentPage(props) {
-  const {checkoutForm, handleChange} = props
-  const history = useHistory()
+  const { checkoutForm, handleChange, resetActiveBasket } = props;
+  const history = useHistory();
+
+  const contactInfo = {
+    name: checkoutForm.name,
+    email: checkoutForm.email,
+    phone: checkoutForm.phone,
+    address: checkoutForm.address,
+  };
+  const creditCardInfo = {
+    creditCardNumber: checkoutForm.creditCardInfo,
+    expirationDate: checkoutForm.expirationDate,
+    cardName: checkoutForm.cardName,
+    securityCode: checkoutForm.securityCode,
+  };
+
+  const orderInfo = {
+    contactInfo: contactInfo,
+    creditCardInfo: creditCardInfo,
+  };
 
   function handleSubmit(e) {
-    e.preventDefault()
-    history.push(checkoutPages.CONFIRMATION_PAGE)
+    e.preventDefault();
+    fetchData(ORDER.CREATE, "POST", orderInfo).then(() => resetActiveBasket());
   }
   return (
     <CenteredContainer>
@@ -63,14 +83,14 @@ function PaymentPage(props) {
             value={checkoutForm.securityCode}
           />
         </Form.Group>
-        <div className="d-flex" style={{justifyContent: "flex-end"}}>
+        <div className="d-flex" style={{ justifyContent: "flex-end" }}>
           <Button block type="submit" size="lg">
             Confirm payment
           </Button>
         </div>
       </Form>
     </CenteredContainer>
-  )
+  );
 }
 
-export default PaymentPage
+export default PaymentPage;

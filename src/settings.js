@@ -27,4 +27,8 @@ const RESTAURANT = {
   ALL: `${RESTAURANT_BASE}`,
 };
 
-export { USER, INFO, RESTAURANT, BASKET };
+const ORDER = {
+  CREATE: `${USER_BASE}/order`,
+};
+
+export { USER, INFO, RESTAURANT, BASKET, ORDER };

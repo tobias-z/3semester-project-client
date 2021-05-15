@@ -1,19 +1,20 @@
-import * as React from "react"
-import {Container, Button, Table} from "react-bootstrap"
-import {useHistory} from "react-router-dom"
-import {checkoutPages} from "./CheckoutPage"
+import * as React from "react";
+import { Container, Button, Table, CardColumns, Card } from "react-bootstrap";
+import { useHistory } from "react-router-dom";
+import { checkoutPages } from "./CheckoutPage";
 
 function ConfirmationPage(props) {
-  const history = useHistory()
-  const {checkoutForm} = props
-  const currentDate = new Date(checkoutForm.delivery)
+  const history = useHistory();
+  const { checkoutForm, activeBasket } = props;
+  const currentDate = new Date(checkoutForm.delivery);
 
   function handleAcceptOfOrder() {
-    history.push(checkoutPages.PAYMENT_PAGE)
+    history.push(checkoutPages.PAYMENT_PAGE);
   }
 
   return (
     <Container>
+      {console.log(activeBasket)}
       <h1 className="text-center">Confirm order</h1>
       <div>
         <h3>Contact Information</h3>
@@ -25,32 +26,27 @@ function ConfirmationPage(props) {
       <hr />
       <div>
         <h3>Your order</h3>
-        <Table striped bordered hover variant="light">
-          <thead>
-            <tr>
-              <th>Name</th>
-              <th>Amount</th>
-              <th>Price</th>
-            </tr>
-          </thead>
-          <tbody>
-            <tr>
-              <td>Tuborg classic</td>
-              <td>5</td>
-              <td>140</td>
-            </tr>
-            <tr>
-              <td>Pizza large</td>
-              <td>2</td>
-              <td>55</td>
-            </tr>
-            <tr>
-              <td>Greek salat</td>
-              <td>2</td>
-              <td>10</td>
-            </tr>
-          </tbody>
-        </Table>
+        <CardColumns>
+          {activeBasket &&
+            activeBasket.items.map((item) => {
+              return (
+                <Card>
+                  <Card.Body>
+                    <Card.Title>
+                      Restaurant name: {item.restaurantName}
+                    </Card.Title>
+                    <Card.Text>Product: {item.itemName}</Card.Text>
+                    <Card.Text>Menu number: {item.dishNumber}</Card.Text>
+                    <Card.Text>Amount: {item.amount}</Card.Text>
+                    <Card.Text>Price: {item.price}</Card.Text>
+                    <div className="d-flex">
+                      <br />
+                    </div>
+                  </Card.Body>
+                </Card>
+              );
+            })}
+        </CardColumns>
       </div>
       <hr className="my-4" />
       <div>
@@ -64,7 +60,7 @@ function ConfirmationPage(props) {
         </Button>
       </div>
     </Container>
-  )
+  );
 }
 
-export default ConfirmationPage
+export default ConfirmationPage;

@@ -95,7 +95,7 @@ function InformationPage(props) {
         </Form.Group>
         <div className="d-flex" style={{ justifyContent: "flex-end" }}>
           <Button type="submit" size="lg">
-            Go to payment
+            Go to confirmation
           </Button>
         </div>
       </Form>

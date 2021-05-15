@@ -86,11 +86,13 @@ function MenuItem(props) {
 
   function handleInputBasket(restaurant) {
     const chosenItem = {
+      itemName: "",
       restaurantName: "",
       dishNumber: "",
       amount: "",
       price: "",
     };
+    chosenItem.itemName = menu.itemName;
     chosenItem.dishNumber = menu.id;
     chosenItem.restaurantName = restaurant.name;
     chosenItem.amount = itemCount;

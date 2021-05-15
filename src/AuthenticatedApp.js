@@ -9,6 +9,7 @@ import MuchDataPage from "./routes/MuchDataPage";
 import RestaurantsPage from "./routes/restaurant/RestaurantsPage";
 import UserPage from "./routes/accounts/UserPage";
 import { BASKET } from "./settings";
+import CheckoutPage from "./routes/checkout/CheckoutPage";
 
 function AuthenticatedApp(props) {
   const { logout, user } = props;
@@ -16,6 +17,9 @@ function AuthenticatedApp(props) {
 
   function loadBasketCount() {
     fetchData(BASKET.ACTIVE).then((data) => setActiveBasket(data));
+  }
+  function resetActiveBasket() {
+    setActiveBasket(null);
   }
   React.useEffect(() => {
     loadBasketCount();
@@ -43,6 +47,13 @@ function AuthenticatedApp(props) {
         </Route>
         <Route path="/basket/active">
           <BasketPage loadBasketCount={loadBasketCount} />
+        </Route>
+        <Route path="/checkout">
+          <CheckoutPage
+            activeBasket={activeBasket}
+            loadBasketCount={loadBasketCount}
+            resetActiveBasket={resetActiveBasket}
+          />
         </Route>
         <Route path="/restaurants">
           <RestaurantsPage
