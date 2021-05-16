@@ -1,20 +1,19 @@
 import * as React from "react";
-import { Card, Container, Form, Button } from "react-bootstrap";
+import { Card, Container, Form, Button, Toast } from "react-bootstrap";
+import { fetchData, handleError } from "../../apiUtils";
+import { BASKET } from "../../settings";
 
 function Search(props) {
-  const { restaurantDATA, loadBasketCount } = props;
+  const { restaurantDATA, loadBasketCount, toggleShow, menu } = props;
 
   const [filteredRestaurant, setFilteredRestaurant] = React.useState();
   const [search, setSearch] = React.useState("");
+  const [chosenMenu, setChosenMenu] = React.useState({
+    menus: "",
+    itemCount: "",
+  });
 
-  const [itemCount, setItemCount] = React.useState(1);
   const [err, setErr] = React.useState();
-  const isCountOne = itemCount === 1;
-
-  const increment = () => setItemCount(itemCount + 1);
-  const decriment = () => setItemCount(itemCount - 1);
-
-  //Method #1 currently not working
 
   React.useEffect(() => {
     let filteredRestaurants = [];
@@ -34,79 +33,125 @@ function Search(props) {
     });
 
     setFilteredRestaurant(filteredRestaurants);
-  }, [search, restaurantDATA.restaurants]);
+  }, [search]);
 
   return (
-    <Container>
-      <Form.Group>
-        <Form.Label>
-          <Form.Control
-            type="search"
-            value={search}
-            onChange={(e) => setSearch(e.target.value)}
-            placeholder="Search"
-          />
-        </Form.Label>
-      </Form.Group>
-      {console.log(filteredRestaurant)}
-      {filteredRestaurant && (
-        <div>
-          {console.log(filteredRestaurant)}
-          <Card>
-            <Card.Header>
-              <Card.Title>Restaurants</Card.Title>
-              <Card.Body>
-                {filteredRestaurant.forEach((restaurant) => {
-                  return (
-                    <Card>
-                      {console.log(restaurant)}
-                      <Card.Title>{restaurant.name}</Card.Title>
-                      <Card.Text>{restaurant.description}</Card.Text>
+    <div>
+      <Container>
+        <Form.Group>
+          <Form.Label>
+            <Form.Control
+              type="search"
+              value={search}
+              onChange={(e) => setSearch(e.target.value)}
+              placeholder="Search"
+            />
+          </Form.Label>
+        </Form.Group>
 
-                      <Card.Body>
-                        <Card.Title>{restaurant.menus[0].itemName}</Card.Title>
-                        <Card.Text>{restaurant.menus[0].description}</Card.Text>
-                        <div className="d-flex">
-                          <Button
-                            style={{ borderRadius: 0 }}
-                            variant="outline-secondary"
-                            disabled={isCountOne}
-                            onClick={decriment}
-                          >
-                            -
-                          </Button>
-                          <Button
-                            style={{ borderRadius: 0 }}
-                            disabled
-                            className="px-3"
-                            variant="outline-secondary"
-                          >
-                            {itemCount}
-                          </Button>
-                          <Button
-                            style={{ borderRadius: 0 }}
-                            variant="outline-secondary"
-                            onClick={increment}
-                          >
-                            +
-                          </Button>
-                          <Button className="ml-3 w-50" variant="secondary">
-                            {restaurant.menus[0].price * itemCount}, - €
-                          </Button>
+        {filteredRestaurant && (
+          <div>
+            {console.log(filteredRestaurant)}
+            <Card>
+              <Card.Header>
+                <Card.Title>Restaurants</Card.Title>
+                <Card.Body>
+                  {filteredRestaurant.map((restaurant) => {
+                    return (
+                      <MenuItem
+                        restaurant={restaurant}
+                        err={err}
+                        setErr={setErr}
+                        loadBasketCount={loadBasketCount}
+                      />
+                    );
+                  })}
+                </Card.Body>
+              </Card.Header>
+            </Card>
+          </div>
+        )}
+      </Container>
+    </div>
+  );
+}
 
-                          <br />
-                          {err && <h4>{err.message}</h4>}
-                        </div>
-                      </Card.Body>
-                    </Card>
-                  );
-                })}
-              </Card.Body>
-            </Card.Header>
-          </Card>
+function MenuItem(props) {
+  const { restaurant, err, setErr, loadBasketCount } = props;
+
+  const [itemCount, setItemCount] = React.useState(1);
+
+  const isCountOne = itemCount === 1;
+
+  const increment = () => setItemCount(itemCount + 1);
+  const decriment = () => setItemCount(itemCount - 1);
+
+  function handleInputBasket(restaurant) {
+    const chosenItem = {
+      itemName: "",
+      restaurantName: "",
+      dishNumber: "",
+      amount: "",
+      price: "",
+    };
+    chosenItem.itemName = restaurant.menus[0].itemName;
+    chosenItem.dishNumber = restaurant.menus[0].id;
+    chosenItem.restaurantName = restaurant.name;
+    chosenItem.amount = itemCount;
+    chosenItem.price = restaurant.menus[0].price;
+
+    fetchData(BASKET.ADD, "POST", chosenItem)
+      .then(() => loadBasketCount())
+      .catch((err) => handleError(err, setErr));
+    console.log(chosenItem);
+  }
+
+  return (
+    <Card>
+      {console.log(restaurant)}
+      <Card.Title>{restaurant.name}</Card.Title>
+      <Card.Text>{restaurant.description}</Card.Text>
+
+      <Card.Body>
+        <Card.Title>{restaurant.menus[0].itemName}</Card.Title>
+        <Card.Text>{restaurant.menus[0].description}</Card.Text>
+        <div className="d-flex">
+          <Button
+            style={{ borderRadius: 0 }}
+            variant="outline-secondary"
+            disabled={isCountOne}
+            onClick={decriment}
+          >
+            -
+          </Button>
+          <Button
+            style={{ borderRadius: 0 }}
+            disabled
+            className="px-3"
+            variant="outline-secondary"
+          >
+            {itemCount}
+          </Button>
+          <Button
+            style={{ borderRadius: 0 }}
+            variant="outline-secondary"
+            onClick={increment}
+          >
+            +
+          </Button>
+          <Button
+            className="ml-3 w-50"
+            variant="secondary"
+            onClick={() => handleInputBasket(restaurant)}
+          >
+            {restaurant.menus[0].price * itemCount}, - €
+          </Button>
+
+          <br />
+          {err && <h4>{err.message}</h4>}
         </div>
-      )}
-    </Container>
+      </Card.Body>
+    </Card>
   );
 }
 

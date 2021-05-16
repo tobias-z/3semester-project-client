@@ -54,6 +54,7 @@ function BasketPage(props) {
                     Restaurant name: {item.restaurantName}
                   </Card.Title>
                   <Card.Text>Dish number: {item.dishNumber}</Card.Text>
+                  <Card.Text>Product name: {item.itemName}</Card.Text>
                   <div className="d-flex">
                     <Button
                       style={{ borderRadius: 0 }}
