@@ -18,8 +18,11 @@ function Search(props) {
   React.useEffect(() => {
     let filteredRestaurants = [];
     restaurantDATA.restaurants.forEach((tempRestaurant) => {
-      const menuItems = tempRestaurant.menus.filter((menuItem) =>
-        menuItem.itemName.toLowerCase().includes(search.toLowerCase())
+      const menuItems = tempRestaurant.menus.filter(
+        (menuItem) =>
+          menuItem.itemName.toLowerCase().includes(search.toLowerCase()) ||
+          menuItem.description.toLowerCase().includes(search.toLowerCase()) ||
+          menuItem.category.toLowerCase().includes(search.toLowerCase())
       );
       const restaurant = {
         name: tempRestaurant.name,
