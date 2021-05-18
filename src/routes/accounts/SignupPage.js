@@ -1,10 +1,9 @@
 import React from "react";
 import { Form, Button } from "react-bootstrap";
-import { useHistory } from "react-router";
 import { fetchData } from "../../apiUtils";
 import CenteredContainer from "../../components/CenteredContainer";
 import { USER } from "../../settings";
-import LoginPage from "./LoginPage";
+
 
 const initialValues = {
   userName: "",
@@ -16,7 +15,7 @@ function SignupPage() {
     React.useState(initialValues);
 
   const [serverError, setServerError] = React.useState(null);
-  const history = useHistory();
+ 
 
   function handleSubmit(event) {
     event.preventDefault();

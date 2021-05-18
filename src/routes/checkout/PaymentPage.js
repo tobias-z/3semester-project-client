@@ -1,20 +1,18 @@
 import * as React from "react";
 import { Form, Button } from "react-bootstrap";
 import CenteredContainer from "../../components/CenteredContainer";
-import { useHistory } from "react-router-dom";
-import { checkoutPages } from "./CheckoutPage";
 import { fetchData } from "../../apiUtils";
 import { ORDER } from "../../settings";
 
 function PaymentPage(props) {
   const { checkoutForm, handleChange, resetActiveBasket } = props;
-  const history = useHistory();
 
   const contactInfo = {
     name: checkoutForm.name,
     email: checkoutForm.email,
     phone: checkoutForm.phone,
     address: checkoutForm.address,
+    delivery: checkoutForm.delivery,
   };
   const creditCardInfo = {
     creditCardNumber: checkoutForm.creditCardInfo,

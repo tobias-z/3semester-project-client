@@ -1,8 +1,6 @@
 import * as React from "react";
 import { Nav, Navbar } from "react-bootstrap";
 import { LinkContainer } from "react-router-bootstrap";
-import { fetchData } from "../apiUtils";
-import { BASKET } from "../settings";
 
 function AuthenticatedHeader(props) {
   return (
@@ -15,19 +13,13 @@ function AuthenticatedHeader(props) {
       variant="dark"
     >
       <LinkContainer to="/">
-        <Navbar.Brand>inSession Startcode</Navbar.Brand>
+        <Navbar.Brand>JustMix</Navbar.Brand>
       </LinkContainer>
       <Navbar.Toggle aria-controls="responsive-navbar-nav" />
       <Navbar.Collapse id="responsive-navbar-nav">
         <Nav className="mr-auto">
-          <LinkContainer exact to="/">
-            <Nav.Link>Home</Nav.Link>
-          </LinkContainer>
           <LinkContainer to="/user">
-            <Nav.Link>User data</Nav.Link>
-          </LinkContainer>
-          <LinkContainer to="/admin">
-            <Nav.Link>Admin data</Nav.Link>
+            <Nav.Link>My profile</Nav.Link>
           </LinkContainer>
           <LinkContainer to="/restaurants">
             <Nav.Link>Restaurants</Nav.Link>
@@ -43,9 +35,11 @@ function AuthenticatedHeader(props) {
               </i>
             </Nav.Link>
           </LinkContainer>
-          <Navbar.Text>
-            Signed in as: {localStorage.getItem("user")}
-          </Navbar.Text>
+
+          <LinkContainer to="/user">
+            <Nav.Link>Signed in as: {localStorage.getItem("user")}</Nav.Link>
+          </LinkContainer>
+
           <LinkContainer to="/">
             <Nav.Link onClick={() => props.logout()}>Log out</Nav.Link>
           </LinkContainer>

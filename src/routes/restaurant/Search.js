@@ -1,17 +1,13 @@
 import * as React from "react";
-import { Card, Container, Form, Button, Toast } from "react-bootstrap";
+import { Card, Container, Form, Button } from "react-bootstrap";
 import { fetchData, handleError } from "../../apiUtils";
 import { BASKET } from "../../settings";
 
 function Search(props) {
-  const { restaurantDATA, loadBasketCount, toggleShow, menu } = props;
+  const { restaurantDATA, loadBasketCount } = props;
 
   const [filteredRestaurant, setFilteredRestaurant] = React.useState();
   const [search, setSearch] = React.useState("");
-  const [chosenMenu, setChosenMenu] = React.useState({
-    menus: "",
-    itemCount: "",
-  });
 
   const [err, setErr] = React.useState();
 
@@ -89,7 +85,7 @@ function MenuItem(props) {
   const increment = () => setItemCount(itemCount + 1);
   const decriment = () => setItemCount(itemCount - 1);
 
-  function handleInputBasket(restaurant) {
+  function handleInputBasket(restaurant, menu) {
     const chosenItem = {
       itemName: "",
       restaurantName: "",
@@ -97,11 +93,11 @@ function MenuItem(props) {
       amount: "",
       price: "",
     };
-    chosenItem.itemName = restaurant.menus[0].itemName;
-    chosenItem.dishNumber = restaurant.menus[0].id;
+    chosenItem.itemName = menu.itemName;
+    chosenItem.dishNumber = menu.id;
     chosenItem.restaurantName = restaurant.name;
     chosenItem.amount = itemCount;
-    chosenItem.price = restaurant.menus[0].price;
+    chosenItem.price = menu.price;
 
     fetchData(BASKET.ADD, "POST", chosenItem)
       .then(() => loadBasketCount())
@@ -114,46 +110,49 @@ function MenuItem(props) {
       {console.log(restaurant)}
       <Card.Title>{restaurant.name}</Card.Title>
       <Card.Text>{restaurant.description}</Card.Text>
+      {restaurant.menus.map((menu) => {
+        return (
+          <Card.Body>
+            <Card.Title>{menu.itemName}</Card.Title>
+            <Card.Text>{menu.description}</Card.Text>
+            <div className="d-flex">
+              <Button
+                style={{ borderRadius: 0 }}
+                variant="outline-secondary"
+                disabled={isCountOne}
+                onClick={decriment}
+              >
+                -
+              </Button>
+              <Button
+                style={{ borderRadius: 0 }}
+                disabled
+                className="px-3"
+                variant="outline-secondary"
+              >
+                {itemCount}
+              </Button>
+              <Button
+                style={{ borderRadius: 0 }}
+                variant="outline-secondary"
+                onClick={increment}
+              >
+                +
+              </Button>
+              <Button
+                className="ml-3 w-50"
+                variant="secondary"
+                onClick={() => handleInputBasket(restaurant, menu)}
+              >
+                {restaurant.menus[0].price * itemCount}, - €
+              </Button>
 
-      <Card.Body>
-        <Card.Title>{restaurant.menus[0].itemName}</Card.Title>
-        <Card.Text>{restaurant.menus[0].description}</Card.Text>
-        <div className="d-flex">
-          <Button
-            style={{ borderRadius: 0 }}
-            variant="outline-secondary"
-            disabled={isCountOne}
-            onClick={decriment}
-          >
-            -
-          </Button>
-          <Button
-            style={{ borderRadius: 0 }}
-            disabled
-            className="px-3"
-            variant="outline-secondary"
-          >
-            {itemCount}
-          </Button>
-          <Button
-            style={{ borderRadius: 0 }}
-            variant="outline-secondary"
-            onClick={increment}
-          >
-            +
-          </Button>
-          <Button
-            className="ml-3 w-50"
-            variant="secondary"
-            onClick={() => handleInputBasket(restaurant)}
-          >
-            {restaurant.menus[0].price * itemCount}, - €
-          </Button>
-
-          <br />
-          {err && <h4>{err.message}</h4>}
-        </div>
-      </Card.Body>
+              <br />
+              {err && <h4>{err.message}</h4>}
+            </div>
+          </Card.Body>
+        );
+      })}
     </Card>
   );
 }

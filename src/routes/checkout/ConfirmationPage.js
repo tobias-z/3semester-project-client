@@ -1,5 +1,5 @@
 import * as React from "react";
-import { Container, Button, Table, CardColumns, Card } from "react-bootstrap";
+import { Container, Button, CardColumns, Card } from "react-bootstrap";
 import { useHistory } from "react-router-dom";
 import { checkoutPages } from "./CheckoutPage";
 

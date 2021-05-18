@@ -1,13 +1,5 @@
 import * as React from "react";
-import {
-  Table,
-  Button,
-  Container,
-  Card,
-  CardGroup,
-  CardDeck,
-  CardColumns,
-} from "react-bootstrap";
+import { Button, Container, Card, CardColumns } from "react-bootstrap";
 import { useHistory } from "react-router-dom";
 import { fetchData, handleError } from "../../apiUtils";
 import { BASKET } from "../../settings";
@@ -17,6 +9,8 @@ function BasketPage(props) {
   const history = useHistory();
   const [data, setData] = React.useState();
   const [err, setErr] = React.useState();
+
+  let finalPrice = 0;
 
   function sendToCheckout() {
     history.push("/checkout");
@@ -47,6 +41,7 @@ function BasketPage(props) {
       <CardColumns>
         {data &&
           data.items.map((item) => {
+            finalPrice = finalPrice + item.price * item.amount;
             return (
               <Card>
                 <Card.Body>
@@ -80,7 +75,7 @@ function BasketPage(props) {
                       +
                     </Button>
                     <Button className="mr-4" variant="secondary" disabled>
-                      {item.price * item.amount}, - €
+                      {item.price * item.amount} - €
                     </Button>
                     <Button
                       className="mr"
@@ -100,6 +95,9 @@ function BasketPage(props) {
           })}
       </CardColumns>
       <div className="d-flex" style={{ justifyContent: "flex-end" }}>
+        <Button disabled variant="outline-secondary">
+          Total price: {finalPrice}
+        </Button>
         <Button onClick={sendToCheckout}>Checkout</Button>
       </div>
     </Container>

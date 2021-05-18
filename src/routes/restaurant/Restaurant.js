@@ -4,7 +4,6 @@ import { useParams } from "react-router-dom";
 import { fetchData, handleError } from "../../apiUtils";
 import { sortRestaurants } from "./RestaurantsPage";
 import { BASKET } from "../../settings";
-import BasketPage from "../basket/BasketPage";
 
 function Restaurant(props) {
   const { restaurantDATA, loadBasketCount } = props;

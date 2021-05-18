@@ -6,6 +6,9 @@ const RESTAURANT_BASE =
 const BASKET_BASE =
   "https://ditlevsoftware.com/tomcat/insession-sem-project/api/basket";
 
+const ORDER_BASE =
+  "https://ditlevsoftware.com/tomcat/insession-sem-project/api/order";
+
 const BASKET = {
   ADD: `${BASKET_BASE}/add/`,
   ACTIVE: `${BASKET_BASE}/active`,
@@ -28,7 +31,8 @@ const RESTAURANT = {
 };
 
 const ORDER = {
-  CREATE: `${USER_BASE}/order`,
+  CREATE: `${ORDER_BASE}`,
+  ALL: `${ORDER_BASE}/orders`,
 };
 
 export { USER, INFO, RESTAURANT, BASKET, ORDER };

@@ -11,7 +11,7 @@ export const checkoutPages = {
 };
 
 function CheckoutPage(props) {
-  const { activeBasket, loadBasketCount, resetActiveBasket } = props;
+  const { activeBasket, resetActiveBasket } = props;
   const initialValues = {
     name: "",
     email: "",
