@@ -9,6 +9,9 @@ const BASKET_BASE =
 const ORDER_BASE =
   "https://ditlevsoftware.com/tomcat/insession-sem-project/api/order";
 
+const POINT_BASE =
+  "https://ditlevsoftware.com/tomcat/insession-sem-project/api/user/bonuspoints/";
+
 const BASKET = {
   ADD: `${BASKET_BASE}/add/`,
   ACTIVE: `${BASKET_BASE}/active`,
@@ -35,4 +38,8 @@ const ORDER = {
   ALL: `${ORDER_BASE}/orders`,
 };
 
-export { USER, INFO, RESTAURANT, BASKET, ORDER };
+const POINT = {
+  ALL: `${POINT_BASE}`,
+};
+
+export { USER, INFO, RESTAURANT, BASKET, ORDER, POINT };

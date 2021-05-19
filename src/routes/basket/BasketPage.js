@@ -10,8 +10,6 @@ function BasketPage(props) {
   const [data, setData] = React.useState();
   const [err, setErr] = React.useState();
 
-  let finalPrice = 0;
-
   function sendToCheckout() {
     history.push("/checkout");
   }
@@ -41,7 +39,6 @@ function BasketPage(props) {
       <CardColumns>
         {data &&
           data.items.map((item) => {
-            finalPrice = finalPrice + item.price * item.amount;
             return (
               <Card>
                 <Card.Body>
@@ -94,12 +91,14 @@ function BasketPage(props) {
             );
           })}
       </CardColumns>
-      <div className="d-flex" style={{ justifyContent: "flex-end" }}>
-        <Button disabled variant="outline-secondary">
-          Total price: {finalPrice}
-        </Button>
-        <Button onClick={sendToCheckout}>Checkout</Button>
-      </div>
+      {data && (
+        <div className="d-flex" style={{ justifyContent: "flex-end" }}>
+          <Button disabled variant="outline-secondary">
+            Total price: {data.totalPrice}
+          </Button>
+          <Button onClick={sendToCheckout}>Checkout</Button>
+        </div>
+      )}
     </Container>
   );
 }
