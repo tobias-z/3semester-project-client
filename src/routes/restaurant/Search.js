@@ -78,14 +78,7 @@ function Search(props) {
 function MenuItem(props) {
   const { restaurant, err, setErr, loadBasketCount } = props;
 
-  const [itemCount, setItemCount] = React.useState(1);
-
-  const isCountOne = itemCount === 1;
-
-  const increment = () => setItemCount(itemCount + 1);
-  const decriment = () => setItemCount(itemCount - 1);
-
-  function handleInputBasket(restaurant, menu) {
+  function handleInputBasket(restaurant, menu, itemCount) {
     const chosenItem = {
       itemName: "",
       restaurantName: "",
@@ -112,48 +105,65 @@ function MenuItem(props) {
       <Card.Text>{restaurant.description}</Card.Text>
       {restaurant.menus.map((menu) => {
         return (
-          <Card.Body>
-            <Card.Title>{menu.itemName}</Card.Title>
-            <Card.Text>{menu.description}</Card.Text>
-            <div className="d-flex">
-              <Button
-                style={{ borderRadius: 0 }}
-                variant="outline-secondary"
-                disabled={isCountOne}
-                onClick={decriment}
-              >
-                -
-              </Button>
-              <Button
-                style={{ borderRadius: 0 }}
-                disabled
-                className="px-3"
-                variant="outline-secondary"
-              >
-                {itemCount}
-              </Button>
-              <Button
-                style={{ borderRadius: 0 }}
-                variant="outline-secondary"
-                onClick={increment}
-              >
-                +
-              </Button>
-              <Button
-                className="ml-3 w-50"
-                variant="secondary"
-                onClick={() => handleInputBasket(restaurant, menu)}
-              >
-                {restaurant.menus[0].price * itemCount}, - €
-              </Button>
-
-              <br />
-              {err && <h4>{err.message}</h4>}
-            </div>
-          </Card.Body>
+          <Item
+            menu={menu}
+            restaurant={restaurant}
+            handleInputBasket={handleInputBasket}
+            err={err}
+          />
         );
       })}
     </Card>
+  );
+}
+
+function Item(props) {
+  const { menu, restaurant, handleInputBasket, err } = props;
+  const [itemCount, setItemCount] = React.useState(1);
+  const isCountOne = itemCount === 1;
+
+  const increment = () => setItemCount(itemCount + 1);
+  const decriment = () => setItemCount(itemCount - 1);
+  return (
+    <Card.Body>
+      <Card.Title>{menu.itemName}</Card.Title>
+      <Card.Text>{menu.description}</Card.Text>
+      <div className="d-flex">
+        <Button
+          style={{ borderRadius: 0 }}
+          variant="outline-secondary"
+          disabled={isCountOne}
+          onClick={decriment}
+        >
+          -
+        </Button>
+        <Button
+          style={{ borderRadius: 0 }}
+          disabled
+          className="px-3"
+          variant="outline-secondary"
+        >
+          {itemCount}
+        </Button>
+        <Button
+          style={{ borderRadius: 0 }}
+          variant="outline-secondary"
+          onClick={increment}
+        >
+          +
+        </Button>
+        <Button
+          className="ml-3 w-50"
+          variant="secondary"
+          onClick={() => handleInputBasket(restaurant, menu, itemCount)}
+        >
+          {menu.price * itemCount}, - €
+        </Button>
+
+        <br />
+        {err && <h4>{err.message}</h4>}
+      </div>
+    </Card.Body>
   );
 }
 
